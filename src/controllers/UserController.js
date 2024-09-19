@@ -61,3 +61,31 @@ exports.logout = async (req, res) => {
     res.status(200).json({ status: "error", error: e.toString() });
   }
 };
+
+//! get User
+exports.profile_read = async (req, res) => {
+  let email = req.headers.email;
+  try {
+    let MatchStage = {
+      $match: {
+        email,
+      },
+    };
+
+    let project = {
+      $project: {
+        email: 1,
+        firstName: 1,
+        lastName: 1,
+        img: 1,
+        phone: 1,
+      },
+    };
+
+    let data = await UserModel.aggregate([MatchStage, project]);
+
+    res.status(200).json({ status: "success", data: data[0] });
+  } catch (e) {
+    res.status(200).json({ status: "error", error: e.toString() });
+  }
+};
