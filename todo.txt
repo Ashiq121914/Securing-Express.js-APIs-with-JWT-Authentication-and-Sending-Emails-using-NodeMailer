@@ -2,3 +2,5 @@
 - we encode the token in the login
 - we decode the token in the middleware.
 - in EmailSend, in transporter we have to buy a domain hosting and collect those data from there, otherwise those won't work.
+
+ - api documentation: https://documenter.getpostman.com/view/26908460/2sAXqs72qY
