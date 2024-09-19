@@ -1,6 +1,7 @@
 let md5 = require("md5");
 const UserModel = require("../models/UserModel");
 const { EncodeToken } = require("../utility/TokenHelper");
+const EmailSend = require("../utility/EmailSend");
 
 //! Create user
 exports.register = async (req, res) => {
@@ -85,6 +86,21 @@ exports.profile_read = async (req, res) => {
     let data = await UserModel.aggregate([MatchStage, project]);
 
     res.status(200).json({ status: "success", data: data[0] });
+  } catch (e) {
+    res.status(200).json({ status: "error", error: e.toString() });
+  }
+};
+
+//! Send Email
+exports.send_Email = async (req, res) => {
+  let reqBody = req.body;
+
+  let emailTo = reqBody.email;
+  let emailText = reqBody.emailText;
+  let emailSubject = reqBody.emailSubject;
+  try {
+    let data = await EmailSend(emailTo, emailText, emailSubject);
+    res.status(200).json({ status: "success", data: data });
   } catch (e) {
     res.status(200).json({ status: "error", error: e.toString() });
   }

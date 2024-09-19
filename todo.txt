@@ -1,3 +1,4 @@
 - in login we set the token in the cookie, so that we can access it from all the request.
 - we encode the token in the login
 - we decode the token in the middleware.
+- in EmailSend, in transporter we have to buy a domain hosting and collect those data from there, otherwise those won't work.

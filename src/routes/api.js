@@ -9,5 +9,6 @@ router.post("/register", UserController.register);
 router.post("/login", UserController.login);
 router.get("/logout", UserController.logout);
 router.get("/profile-read", AuthVerification, UserController.profile_read);
+router.post("/send-email", AuthVerification, UserController.send_Email);
 
 module.exports = router;
